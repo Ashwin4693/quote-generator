@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Quote Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .quote-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 600px;
+      transition: opacity 0.5s ease;
+    }
+
+    .quote-text {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      opacity: 0;
+    }
+
+    .quote-text.show {
+      opacity: 1;
+    }
+
+    .next-btn {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quote-box">
+    <div class="quote-text" id="quoteText">Loading quote...</div>
+    <button class="next-btn" onclick="showNewQuote()">Next Quote</button>
+  </div>
+
+  <script>
+    const quotes = [
+      "Believe you can and you're halfway there. – Theodore Roosevelt",
+      "You are never too old to set another goal or to dream a new dream. – C.S. Lewis",
+      "The only way to do great work is to love what you do. – Steve Jobs",
+      "Start where you are. Use what you have. Do what you can. – Arthur Ashe",
+      "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
+      "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill"
+    ];
+
+    const quoteText = document.getElementById('quoteText');
+
+    function showNewQuote() {
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteText.classList.remove('show');
+      setTimeout(() => {
+        quoteText.textContent = randomQuote;
+        quoteText.classList.add('show');
+      }, 200);
+    }
+
+    // Show a quote on page load
+    window.onload = showNewQuote;
+  </script>
+
+</body>
+</html>
