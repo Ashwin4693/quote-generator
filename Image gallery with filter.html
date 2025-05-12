@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Gallery with Filter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    .buttons {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .buttons button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .buttons button.active {
+      background-color: #0056b3;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery-item {
+      display: none;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="nature">Nature</button>
+    <button class="filter-btn" data-filter="people">People</button>
+    <button class="filter-btn" data-filter="tech">Tech</button>
+  </div>
+
+  <div class="gallery">
+    <div class="gallery-item nature"><img src="nature.jpg" alt="Nature"></div>
+    <div class="gallery-item people"><img src="people.jpg" alt="People"></div>
+    <div class="gallery-item tech"><img src="tech.jpeg" alt="Tech"></div>
+    <div class="gallery-item nature"><img src="nature.jpg" alt="Nature"></div>
+    <div class="gallery-item people"><img src="people.jpg" alt="People"></div>
+    <div class="gallery-item tech"><img src="tech.jpeg" alt="Tech"></div>
+  </div>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove 'active' class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          item.classList.remove('show');
+          if (filter === 'all' || item.classList.contains(filter)) {
+            item.classList.add('show');
+          }
+        });
+      });
+    });
+
+    // Show all items on page load
+    window.onload = () => {
+      document.querySelectorAll('.gallery-item').forEach(item => item.classList.add('show'));
+    };
+  </script>
+
+</body>
+</html>
